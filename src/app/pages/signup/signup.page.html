@@ -1,25 +1,46 @@
 <ion-header> </ion-header>
 
 <ion-content class="ion-padding">
-  <form [formGroup]="signupForm" (ngSubmit)="submitSignupForm()" novalidate>
+  <app-loading-animation *ngIf="isLoading" ></app-loading-animation>
+  <form *ngIf="!isLoading" [formGroup]="signupForm" (ngSubmit)="submitSignupForm()" novalidate>
     <h4>Sign Up</h4>
     <p>Register with EMS APP to get started!</p>
 
     <div class="ion-margin-top">
       <span
         class="error"
-        *ngIf="this.signupForm.get('username').invalid && this.signupForm.get('username').dirty "
+        *ngIf="this.signupForm.get('firstName').invalid && this.signupForm.get('firstName').dirty "
       >
         <ion-text color="danger">
-          Username should be more than 3 characters.</ion-text
+          First Name should be more than 3 characters.</ion-text
         >
       </span>
 
       <ion-input
         class="primary-input"
-        formControlName="username"
+        formControlName="firstName"
         required="true"
-        placeholder="Username: "
+        placeholder="First Name: "
+        type="text"
+      ></ion-input>
+
+      <span
+        class="error"
+        *ngIf="this.signupForm.get('lastName').invalid && this.signupForm.get('lastName').dirty "
+      >
+        <ion-text color="danger">
+          Last Name should be more than 3 characters.</ion-text
+        >
+      </span>
+
+
+
+
+      <ion-input
+        class="primary-input"
+        formControlName="lastName"
+        required="true"
+        placeholder="Last Name: "
         type="text"
       ></ion-input>
 
@@ -43,8 +64,7 @@
         *ngIf="this.signupForm.get('password').invalid && this.signupForm.get('password').dirty"
       >
         <ion-text color="danger"
-          >Password should be minimum eight characters, containing at least one
-          upper case, one number and a special character.</ion-text
+          >Password should be minimum 8 characters and maximum 20 characters.</ion-text
         >
       </span>
 
@@ -54,12 +74,11 @@
         type="password"
         formControlName="password"
         required="true"
-        
       ></ion-input>
 
       <span
         class="error"
-        *ngIf="this.signupForm.get('password') !== this.signupForm.get('confirmPassword') && this.signupForm.get('password').dirty "
+        *ngIf="this.signupForm.get('password').value !== this.signupForm.get('confirmPassword').value && this.signupForm.get('confirmPassword').dirty "
       >
         <ion-text color="danger">Passwords does not match.</ion-text>
       </span>
@@ -75,12 +94,12 @@
     <div class="ion-margin-top ion-text-start terms-conditions">
       <p>
         By signing up, you agree to our
-        <ion-text color="danger">Terms & Conditions</ion-text>.
+        <ion-text color="danger"><a href="www.kingdavid.engineer">Terms & Conditions</a></ion-text>.
       </p>
     </div>
 
     <div class="ion-margin-top ion-text-center">
-      <ion-button expand="block" type="submit">SIGN UP</ion-button>
+      <ion-button [disabled]="!this.signupForm.valid || this.signupForm.get('password').value !== this.signupForm.get('confirmPassword').value " expand="block" type="submit">SIGN UP</ion-button>
     </div>
 
     <div class="ion-margin-top ion-text-center">
