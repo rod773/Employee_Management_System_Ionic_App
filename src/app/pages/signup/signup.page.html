@@ -1,0 +1,90 @@
+<ion-header> </ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="signupForm" (ngSubmit)="submitSignupForm()" novalidate>
+    <h4>Sign Up</h4>
+    <p>Register with EMS APP to get started!</p>
+
+    <div class="ion-margin-top">
+      <span
+        class="error"
+        *ngIf="this.signupForm.get('username').invalid && this.signupForm.get('username').dirty "
+      >
+        <ion-text color="danger">
+          Username should be more than 3 characters.</ion-text
+        >
+      </span>
+
+      <ion-input
+        class="primary-input"
+        formControlName="username"
+        required="true"
+        placeholder="Username: "
+        type="text"
+      ></ion-input>
+
+      <span
+        class="error"
+        *ngIf="this.signupForm.get('email').invalid && this.signupForm.get('email').dirty"
+      >
+        <ion-text color="danger">Please enter a valid email.</ion-text>
+      </span>
+
+      <ion-input
+        class="primary-input"
+        formControlName="email"
+        required="true"
+        placeholder="Email: "
+        type="email"
+      ></ion-input>
+
+      <span
+        class="error"
+        *ngIf="this.signupForm.get('password').invalid && this.signupForm.get('password').dirty"
+      >
+        <ion-text color="danger"
+          >Password should be minimum eight characters, containing at least one
+          upper case, one number and a special character.</ion-text
+        >
+      </span>
+
+      <ion-input
+        class="primary-input"
+        placeholder="Password: "
+        type="password"
+        formControlName="password"
+        required="true"
+        
+      ></ion-input>
+
+      <span
+        class="error"
+        *ngIf="this.signupForm.get('password') !== this.signupForm.get('confirmPassword') && this.signupForm.get('password').dirty "
+      >
+        <ion-text color="danger">Passwords does not match.</ion-text>
+      </span>
+      <ion-input
+        class="primary-input"
+        placeholder="Confirm Password: "
+        type="password"
+        formControlName="confirmPassword"
+        required="true"
+      ></ion-input>
+    </div>
+
+    <div class="ion-margin-top ion-text-start terms-conditions">
+      <p>
+        By signing up, you agree to our
+        <ion-text color="danger">Terms & Conditions</ion-text>.
+      </p>
+    </div>
+
+    <div class="ion-margin-top ion-text-center">
+      <ion-button expand="block" type="submit">SIGN UP</ion-button>
+    </div>
+
+    <div class="ion-margin-top ion-text-center">
+      <a (click)="dismiss()">Close</a>
+    </div>
+  </form>
+</ion-content>

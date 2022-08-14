@@ -34,8 +34,8 @@ export class WelcomePage implements OnInit {
       backdropDismiss: false,
       animated: true,
       mode: 'ios',
-      breakpoints: [0.57, 0.63],
-      initialBreakpoint: 0.57,
+      breakpoints: [0.60, 0.63],
+      initialBreakpoint: 0.60,
       cssClass: 'signup-modal'
     });
     return await modal.present();
