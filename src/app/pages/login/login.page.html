@@ -1,32 +1,53 @@
 <ion-header> </ion-header>
 
 <ion-content class="ion-padding">
-  <div class="title">
-    <h4>Login</h4>
-    <p>Let's get started!</p>
-  </div>
+  <app-loading-animation   *ngIf="isLoading"></app-loading-animation>
+  <form *ngIf="!isLoading" [formGroup]="loginForm" (ngSubmit)="submitLoginForm()" novalidate>
+    <div class="title">
+      <h4>Login</h4>
+      <p>Let's get started!</p>
+    </div>
 
-  <ion-input
-    placeholder="Username: "
-    class="primary-input"
-    type="text"
-  ></ion-input>
-  <ion-input
-    placeholder="Password: "
-    class="primary-input"
-    type="password"
-  ></ion-input>
+    <span
+        class="error"
+        *ngIf="this.loginForm.get('email').invalid && this.loginForm.get('email').dirty"
+      >
+        <ion-text color="danger">Please enter a valid email.</ion-text>
+      </span>
 
-  <div class="ion-margin-top ion-text-right forget">
-    <a>Forgot Password?</a>
-  </div>
+      <ion-input
+        class="primary-input"
+        formControlName="email"
+        required="true"
+        placeholder="Email: "
+        type="email"
+      ></ion-input>
 
+      <!-- <span
+        class="error"
+        *ngIf="this.loginForm.get('password').invalid && this.loginForm.get('password').dirty"
+      >
+        <ion-text color="danger"
+          >Password should be minimum 8 characters and maximum 20 characters.</ion-text
+        >
+      </span> -->
 
-  <div class="ion-margin-top">
-    <ion-button expand="block"  (click)="login()">LOGIN</ion-button>
+      <ion-input
+        class="primary-input"
+        placeholder="Password: "
+        type="password"
+        formControlName="password"
+        required="true"
+      ></ion-input>
 
-  </div>
+    <div class="ion-margin-top ion-text-right forget">
+      <a>Forgot Password?</a>
+    </div>
 
+    <div class="ion-margin-top ion-text-center">
+      <ion-button [disabled]="!this.loginForm.valid " expand="block" type="submit">LOGIN</ion-button>
+    </div>
+  </form>
 
   <div class="ion-margin-top ion-text-center">
     <a (click)="dismiss()">Close</a>

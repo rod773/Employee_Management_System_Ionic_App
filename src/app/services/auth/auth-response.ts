@@ -1,5 +1,6 @@
 export interface AuthResponse {
-  user: {
+  status: string;
+  data: {
     _id: number;
     firstName: string;
     lastName: string;
