@@ -51,12 +51,37 @@
   position: absolute;
 }
 
-.primary-input {
+.error-input {
+  background: rgb(255, 241, 240);
+}
+
+.correct-input {
   background: aliceblue;
-  --padding-start: 10px !important;
+}
+
+.constant-input {
   color: #999999;
   border-radius: 5px;
   margin-bottom: 10px;
+  --padding-start: 10px !important;
 }
 
+.initial-input {
+  background: aliceblue;
+}
 
+.confirmPass-correct {
+  color: #999999;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  --padding-start: 10px !important;
+  background: aliceblue;
+}
+
+.confirmPass-incorrect {
+  color: #999999;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  --padding-start: 10px !important;
+  background: rgb(255, 241, 240);
+}

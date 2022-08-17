@@ -66,6 +66,11 @@ export class SignupPage implements OnInit {
   }
 
   async submitSignupForm() {
+    console.log(
+      this.signupForm.get('password').value !==
+        this.signupForm.get('confirmPassword').value &&
+        this.signupForm.get('confirmPassword').dirty
+    );
     if (!this.signupForm.valid) {
       return;
     }

@@ -1,29 +1,39 @@
 <ion-header> </ion-header>
 
 <ion-content class="ion-padding">
-  <app-loading-animation   *ngIf="isLoading"></app-loading-animation>
-  <form *ngIf="!isLoading" [formGroup]="loginForm" (ngSubmit)="submitLoginForm()" novalidate>
+  <app-loading-animation *ngIf="isLoading"></app-loading-animation>
+  <form
+    *ngIf="!isLoading"
+    [formGroup]="loginForm"
+    (ngSubmit)="submitLoginForm()"
+    novalidate
+  >
     <div class="title">
       <h4>Login</h4>
       <p>Let's get started!</p>
     </div>
 
     <span
-        class="error"
-        *ngIf="this.loginForm.get('email').invalid && this.loginForm.get('email').dirty"
-      >
-        <ion-text color="danger">Please enter a valid email.</ion-text>
-      </span>
+      class="error"
+      *ngIf="this.loginForm.get('email').invalid && this.loginForm.get('email').dirty"
+    >
+      <ion-text color="danger">Please enter a valid email.</ion-text>
+    </span>
 
-      <ion-input
-        class="primary-input"
-        formControlName="email"
-        required="true"
-        placeholder="Email: "
-        type="email"
-      ></ion-input>
+    <ion-input
+      [ngClass]="{
+          'initial-input': !this.loginForm.get('email').dirty,
+          'error-input':this.loginForm.get('email').invalid && this.loginForm.get('email').dirty,
+          'correct-input':!this.loginForm.get('email').invalid && this.loginForm.get('email').dirty,
+          'constant-input':true
+        }"
+      formControlName="email"
+      required="true"
+      placeholder="Email: "
+      type="email"
+    ></ion-input>
 
-      <!-- <span
+    <!-- <span
         class="error"
         *ngIf="this.loginForm.get('password').invalid && this.loginForm.get('password').dirty"
       >
@@ -32,20 +42,30 @@
         >
       </span> -->
 
-      <ion-input
-        class="primary-input"
-        placeholder="Password: "
-        type="password"
-        formControlName="password"
-        required="true"
-      ></ion-input>
+    <ion-input
+      [ngClass]="{
+          'initial-input': !this.loginForm.get('password').dirty,
+          'error-input':this.loginForm.get('password').invalid && this.loginForm.get('password').dirty,
+          'correct-input':!this.loginForm.get('password').invalid && this.loginForm.get('password').dirty,
+          'constant-input':true
+        }"
+      placeholder="Password: "
+      type="password"
+      formControlName="password"
+      required="true"
+    ></ion-input>
 
     <div class="ion-margin-top ion-text-right forget">
       <a>Forgot Password?</a>
     </div>
 
     <div class="ion-margin-top ion-text-center">
-      <ion-button [disabled]="!this.loginForm.valid " expand="block" type="submit">LOGIN</ion-button>
+      <ion-button
+        [disabled]="!this.loginForm.valid "
+        expand="block"
+        type="submit"
+        >LOGIN</ion-button
+      >
     </div>
   </form>
 

@@ -17,7 +17,12 @@
       </span>
 
       <ion-input
-        class="primary-input"
+        [ngClass]="{
+          'initial-input': !this.signupForm.get('firstName').dirty,
+          'error-input':this.signupForm.get('firstName').invalid && this.signupForm.get('firstName').dirty,
+          'correct-input':!this.signupForm.get('firstName').invalid && this.signupForm.get('firstName').dirty,
+          'constant-input':true
+        }"
         formControlName="firstName"
         required="true"
         placeholder="First Name: "
@@ -37,7 +42,12 @@
 
 
       <ion-input
-        class="primary-input"
+        [ngClass]="{
+          'initial-input': !this.signupForm.get('lastName').dirty,
+          'error-input':this.signupForm.get('lastName').invalid && this.signupForm.get('lastName').dirty,
+          'correct-input':!this.signupForm.get('lastName').invalid && this.signupForm.get('lastName').dirty,
+          'constant-input':true
+        }"
         formControlName="lastName"
         required="true"
         placeholder="Last Name: "
@@ -52,7 +62,12 @@
       </span>
 
       <ion-input
-        class="primary-input"
+        [ngClass]="{
+          'initial-input': !this.signupForm.get('email').dirty,
+          'error-input':this.signupForm.get('email').invalid && this.signupForm.get('email').dirty,
+          'correct-input':!this.signupForm.get('email').invalid && this.signupForm.get('email').dirty,
+          'constant-input':true
+        }"
         formControlName="email"
         required="true"
         placeholder="Email: "
@@ -69,7 +84,12 @@
       </span>
 
       <ion-input
-        class="primary-input"
+        [ngClass]="{
+          'initial-input': !this.signupForm.get('password').dirty,
+          'error-input':this.signupForm.get('password').invalid && this.signupForm.get('password').dirty,
+          'correct-input':!this.signupForm.get('password').invalid && this.signupForm.get('password').dirty,
+          'constant-input':true
+        }"
         placeholder="Password: "
         type="password"
         formControlName="password"
@@ -83,7 +103,12 @@
         <ion-text color="danger">Passwords does not match.</ion-text>
       </span>
       <ion-input
-        class="primary-input"
+       [ngClass]="{
+          'initial-input':!this.signupForm.get('confirmPassword').dirty ,
+          'constant-input':true,
+          'confirmPass-correct':!this.signupForm.get('password').value !== this.signupForm.get('confirmPassword').value && this.signupForm.get('confirmPassword').dirty,
+          'confirmPass-incorrect':this.signupForm.get('password').value !== this.signupForm.get('confirmPassword').value && this.signupForm.get('confirmPassword').dirty
+        }"
         placeholder="Confirm Password: "
         type="password"
         formControlName="confirmPassword"
@@ -99,7 +124,9 @@
     </div>
 
     <div class="ion-margin-top ion-text-center">
-      <ion-button [disabled]="!this.signupForm.valid || this.signupForm.get('password').value !== this.signupForm.get('confirmPassword').value " expand="block" type="submit">SIGN UP</ion-button>
+      <ion-button
+
+      expand="block" type="submit">SIGN UP</ion-button>
     </div>
 
     <div class="ion-margin-top ion-text-center">
