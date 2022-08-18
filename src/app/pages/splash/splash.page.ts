@@ -7,14 +7,11 @@ import { NavController } from '@ionic/angular';
   styleUrls: ['./splash.page.scss'],
 })
 export class SplashPage implements OnInit {
-
   constructor(private navCtrl: NavController) {
-
     setTimeout(() => {
-      navCtrl.navigateRoot('/tabs');
+      navCtrl.navigateRoot('/welcome');
     }, 4000);
-   }
-
-  ngOnInit() {
   }
+
+  ngOnInit() {}
 }

@@ -7,7 +7,6 @@ import { IonicModule } from '@ionic/angular';
 import { SignupPageRoutingModule } from './signup-routing.module';
 
 import { SignupPage } from './signup.page';
-import { LoadingAnimationComponent } from 'src/app/components/loading-animation/loading-animation.component';
 
 @NgModule({
   imports: [
@@ -17,6 +16,6 @@ import { LoadingAnimationComponent } from 'src/app/components/loading-animation/
     SignupPageRoutingModule,
     ReactiveFormsModule,
   ],
-  declarations: [SignupPage, LoadingAnimationComponent],
+  declarations: [SignupPage],
 })
 export class SignupPageModule {}

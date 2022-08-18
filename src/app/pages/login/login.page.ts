@@ -7,6 +7,8 @@ import {
 } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { LoginInterface } from 'src/app/services/auth/loginInterface';
+import { LoadingService } from 'src/app/services/loading_service/loading.service';
+import { ToastService } from 'src/app/services/toast/toast.service';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +17,6 @@ import { LoginInterface } from 'src/app/services/auth/loginInterface';
 })
 export class LoginPage implements OnInit {
   isSubmitted = false;
-  isLoading = false;
   loginForm: FormGroup = this.loginFormBuilder.group({
     email: ['', [Validators.required, Validators.email]],
     password: [
@@ -32,25 +33,15 @@ export class LoginPage implements OnInit {
   constructor(
     public modalCtrl: ModalController,
     public loginFormBuilder: FormBuilder,
-    private loginService: AuthService,
-    public toastCtrl: ToastController,
-    public navCtrl: NavController
+    private authService: AuthService,
+    private loadingService: LoadingService,
+    private navCtrl: NavController,
+    private toastService: ToastService
   ) {}
 
   ngOnInit() {}
 
-  async showLoginToast() {
-    const toast = await this.toastCtrl.create({
-      message: 'Login successful! Welcome back.',
-      duration: 3000,
-      animated: true,
-      color: 'success',
-      position: 'bottom',
-    });
-    toast.present();
-  }
-
-  async dismiss() {
+  async dismissLoginModal() {
     await this.modalCtrl.dismiss();
   }
 
@@ -58,31 +49,19 @@ export class LoginPage implements OnInit {
     if (!this.loginForm.valid) {
       return;
     }
-    this.isLoading = true;
+
     const user: LoginInterface = {
       email: this.loginForm.value.email,
       password: this.loginForm.value.password,
     };
 
-    try {
-      const response = await this.loginService.login(user);
-      response.subscribe((res) => {
-         console.log(res.data);
-        if (res.status === 'success') {
-          setTimeout(() => {
-            this.isLoading = false;
-          }, 3000);
-
-          this.loginForm.reset();
-          this.dismiss();
-          this.showLoginToast();
-          this.navCtrl.navigateRoot('/home');
-        } else {
-          console.log(res.data);
-        }
-      });
-    } catch (error) {
-      console.log(error);
-    }
+    this.authService.loginUser(user).subscribe((res) => {
+      this.loadingService.dismissLoading();
+      console.log(res);
+      this.loginForm.reset();
+      this.dismissLoginModal();
+      this.toastService.presentToast('Login Successful!', false);
+      this.navCtrl.navigateRoot('/tabs');
+    });
   }
 }

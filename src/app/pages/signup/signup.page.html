@@ -1,8 +1,7 @@
 <ion-header> </ion-header>
 
 <ion-content class="ion-padding">
-  <app-loading-animation *ngIf="isLoading" ></app-loading-animation>
-  <form *ngIf="!isLoading" [formGroup]="signupForm" (ngSubmit)="submitSignupForm()" novalidate>
+  <form  [formGroup]="signupForm" (ngSubmit)="submitSignupForm()" novalidate>
     <h4>Sign Up</h4>
     <p>Register with EMS APP to get started!</p>
 
@@ -130,7 +129,7 @@
     </div>
 
     <div class="ion-margin-top ion-text-center">
-      <a (click)="dismiss()">Close</a>
+      <a (click)="dismissSignupModal()">Close</a>
     </div>
   </form>
 </ion-content>
